@@ -8,7 +8,7 @@ var URL 	= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
 try
 {
 	app.get('/', function(req, res) {
-		console.log('[GET] /');
+		res.send('Node app running.');
 	});
 	
 	app.get('/olx', function(req, res){
