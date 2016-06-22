@@ -4,6 +4,7 @@ var jsdom 	= require('jsdom');			// carrega response com JQuery
 var iconv  	= require('iconv-lite');	// encoding
 var app 	= module.exports = express();
 var URL 	= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
+var port 	= process.env.PORT || 3001;
 
 try
 {
@@ -15,8 +16,8 @@ try
 		getOLX(res);
 	});
 	
-	app.listen(3001, function () {
-		console.log('Example app listening on port 3001!');
+	app.listen(port, function () {
+		console.log('Example app listening on port ' + port);
 	});
 }
 catch (e)
