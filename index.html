@@ -1,0 +1,98 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
+		<script type="text/javascript">
+			function getImoveis() {
+				var contentBody = $('body');
+				var listLink = $(".OLXad-list-link" );
+				var msg = '';
+				$.each(listLink, function( index, value ) {
+				  msg += value.title + ': ' + $(value).find('.col-3').children().text() + '\n';
+				});
+				
+				window.alert(msg);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="row">
+			<button type="button" onclick="javascript: getImoveis()">Parse</button>
+		</div>
+		<ul class="list" id="main-ad-list">
+			<li class="item">
+				<a class="OLXad-list-link" name="209180260" id="209180260" onclick="xt_med('C','147','list_ads','N'); return bna_send_ad_listing(this, 0, 209180260);" href="http://sc.olx.com.br/florianopolis-e-regiao/imoveis/enorme-apto-de-1-quarto-ao-lado-da-ufsc-209180260" title="Enorme apto de 1 quarto ao lado da UFSC">				
+					<div class="col-1">
+						<div class="OLXad-list-image">
+							<div class="OLXad-list-image-box">
+								<span class="no-photo">sem foto</span>								
+							</div>
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="OLXad-list-line-1 mb5px">
+							<h3 class="OLXad-list-title mb5px">
+								Enorme apto de 1 quarto ao lado da UFSC
+							</h3>								
+							<p class="text detail-specific mt5px">
+								1 quarto | 50 m² | Condomínio: R$ 0 | 2 vagas
+							</p>							
+						</div>							
+						<div class="OLXad-list-line-2">
+							<p class="text detail-region">
+								Florianópolis, Trindade									
+							</p>
+							<p class="text detail-category">
+								Apartamentos
+							</p>
+						</div>
+					</div>
+					<div class="col-3">
+						<p class="OLXad-list-price"> R$ 1.150</p>
+					</div>
+					<div class="col-4">
+						<p class="text mb5px">Ontem</p>
+						<p class="text mb5px">21:54</p>
+					</div>
+				</a>
+			</li>
+			<li class="item">
+				<a class="OLXad-list-link" name="209180260" id="209180260" onclick="xt_med('C','147','list_ads','N'); return bna_send_ad_listing(this, 0, 209180260);" href="http://sc.olx.com.br/florianopolis-e-regiao/imoveis/enorme-apto-de-1-quarto-ao-lado-da-ufsc-209180260" title="Enorme apto de 1 quarto ao lado da UFSC">				
+					<div class="col-1">
+						<div class="OLXad-list-image">
+							<div class="OLXad-list-image-box">
+								<span class="no-photo">sem foto</span>								
+							</div>
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="OLXad-list-line-1 mb5px">
+							<h3 class="OLXad-list-title mb5px">
+								Enorme apto de 1 quarto ao lado da UFSC
+							</h3>								
+							<p class="text detail-specific mt5px">
+								1 quarto | 50 m² | Condomínio: R$ 0 | 2 vagas
+							</p>							
+						</div>							
+						<div class="OLXad-list-line-2">
+							<p class="text detail-region">
+								Florianópolis, Trindade									
+							</p>
+							<p class="text detail-category">
+								Apartamentos
+							</p>
+						</div>
+					</div>
+					<div class="col-3">
+						<p class="OLXad-list-price"> R$ 1.150</p>
+					</div>
+					<div class="col-4">
+						<p class="text mb5px">Ontem</p>
+						<p class="text mb5px">21:54</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</body>
+</html>
