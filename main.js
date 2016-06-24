@@ -53,7 +53,7 @@ function getOLX(res) {
 					done: function (err, window) {
 						var $ = window.jQuery;
 						var listLink = $(".OLXad-list-link" );
-						var content = '<table>';
+						var content = '<table style=\'color: #fff;\'>';
 						$.each(listLink, function(index, value) {
 						  content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + $(value).find('.col-3').children().text() + '</td></tr>';
 						});
