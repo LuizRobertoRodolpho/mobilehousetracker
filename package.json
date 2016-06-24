@@ -5,13 +5,14 @@
     "node": "4.4.4"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "4.13.4",
     "http": "0.0.0",
-	"iconv-lite": "0.4.13",
-	"jsdom": "9.2.1",
-	"request": "2.72.0"
+    "iconv-lite": "0.4.13",
+    "jsdom": "9.2.1",
+    "request": "2.72.0"
   },
   "scripts": {
-	  "start": "node main.js"
-	}
+    "start": "node main.js"
+  }
 }
