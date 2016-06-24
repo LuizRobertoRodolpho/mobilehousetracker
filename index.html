@@ -130,7 +130,7 @@
 			$.ajax({
 			    dataType: "text",
 			    type: "GET",
-			    url: "http://localhost:3001/olx",
+			    url: "https://mobilehousetracker.herokuapp.com/",
 			    success: function (data) {
 			        $('#itemsDiv').html(data);
 					$( "#loadingDiv" ).fadeOut("slow", function() {
@@ -177,7 +177,7 @@
 			    dataType: "text",
 				data: { URL: url, MAX: $('#maxValueInput').val() },
 			    type: "POST",
-			    url: "http://localhost:3001/olx",
+			    url: "https://mobilehousetracker.herokuapp.com/",
 			    success: function (data) {
 			        $('#itemsDiv').html(data);
 					$( "#loadingDiv" ).fadeOut("slow", function() {
