@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<style type="text/css">
+			html, body {			 
+				  margin: 0px;
+			}
+			#bg {
+			  position: fixed; 
+			  top: 0; 
+			  left: 0;
+				
+			  /* Preserve aspet ratio */
+			  min-width: 100%;
+			  min-height: 100%;
+			}
+			
+			input[type="checkbox"].checkbox {
+				display: none;
+			}
+			input[type="checkbox"].checkbox + label {
+				display: inline;
+				position: relative;
+				background-color: #b94a48;
+				
+				/*label styling*/
+				padding: 6px 10px;
+				font-size: 11.844px;
+				font-weight: bold;
+				line-height: 14px;
+				color: #ffffff;
+				vertical-align: middle;
+				white-space: nowrap;
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				border-radius: 3px;
+			}
+			input[type="checkbox"].checkbox:checked + label {
+				background-color: #468847;
+			}
+			input[type="checkbox"].checkbox:disabled + label {
+				opacity: 0.5;
+			}
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+			
+			.customForm {
+				background: rgba(0, 0, 0, 0.4);
+				color: #000;
+				border-radius: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <img src="content/images/house.jpg" id="bg" alt=""> -->
+		<img src="http://meelheimsmoving.com/wp-content/uploads/2015/06/contactthumb.jpg" id="bg" alt="">
+		<div class="row">
+			<h3>Mobile House Tracker</h3>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-1 text-center" style="text-align: justify;">
+				<div id="itemsDiv" class="customForm" style="padding: 70px; color: #fff; font: 22px black verdana; display: none;">
+					
+				</div>
+			</div>
+			<div id="filterForm" class="col-md-3 col-md-offset-1 text-center customForm">
+				<div style="padding: 30px;">
+					<div class="row">
+						<input id="olxCheckbox" type="checkbox" checked="true" class="checkbox" />
+						<label for="olxCheckbox">OLX</label>
+						<input id="zapCheckbox" disabled="true" type="checkbox" class="checkbox" />
+						<label for="zapCheckbox">ZAP</label>
+						<input id="vivarealCheckbox" disabled="true" type="checkbox" class="checkbox" />
+						<label for="vivarealCheckbox">Viva Real</label>
+						<input id="mlCheckbox" disabled="true" type="checkbox" class="checkbox" />
+						<label for="mlCheckbox">Mercado Livre</label>
+					</div>
+					<br />
+					<div class="row input-group input-group-lg" style="padding: 30px;">
+						<span class="input-group-addon">R$</span>
+						<input type="number" step="any" min="1" class="form-control input-lg text-right">
+						<span class="input-group-addon">,00</span>
+					</div>
+					<br />
+					<div class="row">
+						
+					</div>
+					<br />
+					<div class="row">
+						<button id="startMonitorButton" type="button" class="btn btn-default btn-lg">Start Monitor</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$( "#startMonitorButton" ).click(function() {
+				$( "#itemsDiv" ).fadeOut("slow", function() {
+					getImoveis();
+				});
+							  
+			});
+		});
+		
+		function getImoveis() {
+			$.ajax({
+			    dataType: "text",
+			    type: "GET",
+			    url: "http://localhost:3001/olx",
+			    success: function (data) {
+			        $('#itemsDiv').html(data);
+					$( "#itemsDiv" ).fadeIn("slow", function() {
+					});
+			    },
+				error: function (e) {
+					console.log(e);
+				}
+			});
+		}
+	</script>
+</html>

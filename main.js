@@ -5,11 +5,12 @@ var iconv  	= require('iconv-lite');	// encoding
 var app 	= module.exports = express();
 var URL 	= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
 var port 	= process.env.PORT;
+var path    = require("path");
 
 try
 {
 	app.get('/', function(req, res) {
-		res.send('Node app running.');
+		res.sendFile(path.join(__dirname + '/index.html'));
 	});
 	
 	app.get('/olx', function(req, res){
@@ -54,7 +55,7 @@ function getOLX(res) {
 						var listLink = $(".OLXad-list-link" );
 						var content = '<table>';
 						$.each(listLink, function(index, value) {
-						  content += '<tr><td style=\'border-bottom: 1px solid lightgray;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + $(value).find('.col-3').children().text() + '</td></tr>';
+						  content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + $(value).find('.col-3').children().text() + '</td></tr>';
 						});
 						content += '</table>';
 						res.send(content);
