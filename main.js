@@ -1,20 +1,27 @@
-var request = require('request'); 		// requisições
-var express = require('express');		// routes
-var jsdom 	= require('jsdom');			// carrega response com JQuery 
-var iconv  	= require('iconv-lite');	// encoding
-var app 	= module.exports = express();
-var URL 	= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
-var port 	= process.env.PORT;
-var path    = require("path");
+var request 	= require('request'); 		// requisições
+var express 	= require('express');		// routes
+var jsdom 		= require('jsdom');			// carrega response com JQuery 
+var iconv  		= require('iconv-lite');	// encoding
+var bodyParser  = require("body-parser");
+var app 		= module.exports = express();
+var URL 		= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
+var port 		= process.env.PORT;
+var path    	= require("path");
 
 try
 {
+	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(bodyParser.json());
+
 	app.get('/', function(req, res) {
 		res.sendFile(path.join(__dirname + '/index.html'));
 	});
 	
 	app.get('/olx', function(req, res){
-		getOLX(res);
+		//getOLX(req, res);
+	});	
+	app.post('/olx',function(req, res){
+		getOLX(req, res);
 	});
 	
 	app.listen(port, function () {
@@ -26,10 +33,10 @@ catch (e)
 	console.log(e);
 }
 
-function getOLX(res) {
+function getOLX(req,res) {
 	// propriedades para request
 	var reqOptions = {
-			uri: URL,
+			uri: req.body.URL,
 			encoding: null
 		};
 		
@@ -54,10 +61,21 @@ function getOLX(res) {
 						var $ = window.jQuery;
 						var listLink = $(".OLXad-list-link" );
 						var content = '<table style=\'color: #fff;\'>';
+						
 						$.each(listLink, function(index, value) {
-						  content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + $(value).find('.col-3').children().text() + '</td></tr>';
+							var priceText = $(value).find('.col-3').children().text();
+							if (priceText)
+							{
+								var price = parseInt(priceText.substring(4, priceText.length).replace('.', ''));
+								
+								if (parseInt(req.body.MAX) >= price || !req.body.MAX)
+								{
+									content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + priceText  + '</td></tr>';
+								}
+							}
 						});
 						content += '</table>';
+						
 						res.send(content);
 					}
 				});

@@ -4,18 +4,28 @@
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<style type="text/css">
 			html, body {			 
-				  margin: 0px;
+				height: 100%;
+				width: 100%;
+				padding: 0;
+				margin: 0;
+			}			
+			#full-screen-background-image {
+				z-index: -999;
+				min-height: 100%;
+				min-width: 1024px;
+				width: 100%;
+				height: auto;
+				position: fixed;
+				top: 0;
+				left: 0;
 			}
-			#bg {
-			  position: fixed; 
-			  top: 0; 
-			  left: 0;
-				
-			  /* Preserve aspet ratio */
-			  min-width: 100%;
-			  min-height: 100%;
-			}
-			
+			#wrapper {
+				position: relative;
+				width: 800px;
+				min-height: 400px;
+				margin: 100px auto;
+				color: #333;
+			}			
 			input[type="checkbox"].checkbox {
 				display: none;
 			}
@@ -47,8 +57,7 @@
 			input::-webkit-inner-spin-button {
 				-webkit-appearance: none;
 				margin: 0;
-			}
-			
+			}			
 			.customForm {
 				background: rgba(0, 0, 0, 0.4);
 				color: #000;
@@ -57,13 +66,13 @@
 		</style>
 	</head>
 	<body>
-		<!-- <img src="content/images/house.jpg" id="bg" alt=""> -->
-		<img src="http://meelheimsmoving.com/wp-content/uploads/2015/06/contactthumb.jpg" id="bg" alt="">
-		<div class="row">
-			<h3>Mobile House Tracker</h3>
-		</div>
+		<img alt="full screen background image" src="http://meelheimsmoving.com/wp-content/uploads/2015/06/contactthumb.jpg" id="full-screen-background-image" /> 
+		<h1 style="color: #fff; padding: 20px;"></h3>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-1 text-center" style="text-align: justify;">
+				<div id="loadingDiv" class="text-center" style="display: none;">
+					<img src="http://www.sindexs.org/Images/Loading1.gif" width="100" height="100">
+				</div>
 				<div id="itemsDiv" class="customForm" style="padding: 70px; color: #fff; font: 22px black verdana; display: none;">
 					
 				</div>
@@ -83,16 +92,24 @@
 					<br />
 					<div class="row input-group input-group-lg" style="padding: 30px;">
 						<span class="input-group-addon">R$</span>
-						<input type="number" step="any" min="1" class="form-control input-lg text-right">
+						<input id="maxValueInput" type="number" step="any" min="1" class="form-control input-lg text-right">
 						<span class="input-group-addon">,00</span>
 					</div>
-					<br />
 					<div class="row">
-						
+						<div class="form-group input-group-lg" style="padding: 30px;">
+							<select id="regionSelect" class="form-control">
+								<option value="0">Todas regiões</option>
+								<option value="1">Florianópolis - Centro</option>
+								<option value="2">Florianópolis - Continente</option>
+								<option value="3">Florianópolis - Leste</option>
+								<option value="4">Florianópolis - Norte</option>
+								<option value="5">Florianópolis - Sul</option>
+							</select>
+						</div>
 					</div>
 					<br />
 					<div class="row">
-						<button id="startMonitorButton" type="button" class="btn btn-default btn-lg">Start Monitor</button>
+						<button id="startMonitorButton" type="button" class="btn btn-primary btn-lg">Start Monitor</button>
 					</div>
 				</div>
 			</div>
@@ -102,24 +119,75 @@
 		$( document ).ready(function() {
 			$( "#startMonitorButton" ).click(function() {
 				$( "#itemsDiv" ).fadeOut("slow", function() {
-					getImoveis();
+					//getImoveis();
+					getByRegion();
 				});
-							  
 			});
 		});
 		
 		function getImoveis() {
+			$( "#loadingDiv" ).fadeIn("slow", function() {});
 			$.ajax({
 			    dataType: "text",
 			    type: "GET",
-			    url: "https://mobilehousetracker.herokuapp.com/olx",
+			    url: "http://localhost:3001/olx",
 			    success: function (data) {
 			        $('#itemsDiv').html(data);
-					$( "#itemsDiv" ).fadeIn("slow", function() {
+					$( "#loadingDiv" ).fadeOut("slow", function() {
+						$( "#itemsDiv" ).fadeIn("slow", function() {
+						});
 					});
+					
 			    },
 				error: function (e) {
 					console.log(e);
+					$( "#loadingDiv" ).fadeOut("slow", function() {});
+				}
+			});
+		}
+		
+		function getByRegion() {
+			var url;
+			var selectedItem = parseInt($('#regionSelect').val());
+			
+			switch (selectedItem)
+			{
+				case 1:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/centro/imoveis/aluguel';
+					break;
+				case 2:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/continente/imoveis/aluguel';
+					break;
+				case 3:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel';
+					break;
+				case 4:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/norte/imoveis/aluguel';
+					break;
+				case 5:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/sul/imoveis/aluguel';
+					break;
+				default:
+					url = 'http://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel';
+					break;
+			}
+			
+			$( "#loadingDiv" ).fadeIn("slow", function() {});
+			$.ajax({
+			    dataType: "text",
+				data: { URL: url, MAX: $('#maxValueInput').val() },
+			    type: "POST",
+			    url: "http://localhost:3001/olx",
+			    success: function (data) {
+			        $('#itemsDiv').html(data);
+					$( "#loadingDiv" ).fadeOut("slow", function() {
+						$( "#itemsDiv" ).fadeIn("slow", function() {
+						});
+					});					
+			    },
+				error: function (e) {
+					console.log(e);
+					$( "#loadingDiv" ).fadeOut("slow", function() {});
 				}
 			});
 		}
