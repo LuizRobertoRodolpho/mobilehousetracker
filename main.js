@@ -5,13 +5,14 @@ var iconv  		= require('iconv-lite');	// encoding
 var bodyParser  = require("body-parser");
 var app 		= module.exports = express();
 var URL 		= "http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel";
-var port 		= process.env.PORT;
+var port 		= process.env.PORT || 3000;
 var path    	= require("path");
 
 try
 {
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
+	app.use('/public', express.static(__dirname + '/public'));
 
 	app.get('/', function(req, res) {
 		res.sendFile(path.join(__dirname + '/index.html'));
