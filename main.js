@@ -71,7 +71,7 @@ function getOLX(req,res) {
 								
 								if (parseInt(req.body.MAX) >= price || !req.body.MAX)
 								{
-									content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + priceText  + '</td><td><img src=\"public/olx.jpg\" /></td></tr>';
+									content += '<tr><td style=\'border-bottom: 1px solid lightgray; font: 18px;\'>' + value.title + '</td><td style=\'width: 100px; border-bottom: 1px solid lightgray;\'>' + priceText  + '</td><td><a href=\"' + value.href + '\" target=\"_blank\"><img src=\"public/olx.jpg\" /></a></td></tr>';
 								}
 							}
 						});
