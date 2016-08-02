@@ -1,5 +1,6 @@
 <html>
 	<head>
+        <title>Mobile House Tracker</title>
 		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<style type="text/css">
@@ -67,7 +68,7 @@
 	</head>
 	<body>
 		<img alt="full screen background image" src="public/contactthumb.jpg" id="full-screen-background-image" /> 
-		<h1 style="color: #fff; padding: 20px;"></h3>
+		<h1 style="color: #fff; padding: 20px;"></h1>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-1 text-center" style="text-align: justify;">
 				<div id="loadingDiv" class="text-center" style="display: none;">
@@ -115,81 +116,82 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript">
-		$( document ).ready(function() {
-			$( "#startMonitorButton" ).click(function() {
-				$( "#itemsDiv" ).fadeOut("slow", function() {
-					//getImoveis();
-					getByRegion();
-				});
-			});
-		});
-		
-		function getImoveis() {
-			$( "#loadingDiv" ).fadeIn("slow", function() {});
-			$.ajax({
-			    dataType: "text",
-			    type: "GET",
-			    url: "https://mobilehousetracker.herokuapp.com/olx",
-			    success: function (data) {
-			        $('#itemsDiv').html(data);
-					$( "#loadingDiv" ).fadeOut("slow", function() {
-						$( "#itemsDiv" ).fadeIn("slow", function() {
-						});
-					});
-					
-			    },
-				error: function (e) {
-					console.log(e);
-					$( "#loadingDiv" ).fadeOut("slow", function() {});
-				}
-			});
-		}
-		
-		function getByRegion() {
-			var url;
-			var selectedItem = parseInt($('#regionSelect').val());
-			
-			switch (selectedItem)
-			{
-				case 1:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/centro/imoveis/aluguel';
-					break;
-				case 2:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/continente/imoveis/aluguel';
-					break;
-				case 3:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel';
-					break;
-				case 4:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/norte/imoveis/aluguel';
-					break;
-				case 5:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/sul/imoveis/aluguel';
-					break;
-				default:
-					url = 'http://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel';
-					break;
-			}
-			
-			$( "#loadingDiv" ).fadeIn("slow", function() {});
-			$.ajax({
-			    dataType: "text",
-				data: { URL: url, MAX: $('#maxValueInput').val() },
-			    type: "POST",
-			    url: "https://mobilehousetracker.herokuapp.com/olx",
-			    success: function (data) {
-			        $('#itemsDiv').html(data);
-					$( "#loadingDiv" ).fadeOut("slow", function() {
-						$( "#itemsDiv" ).fadeIn("slow", function() {
-						});
-					});					
-			    },
-				error: function (e) {
-					console.log(e);
-					$( "#loadingDiv" ).fadeOut("slow", function() {});
-				}
-			});
-		}
-	</script>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#startMonitorButton").click(function () {
+            $("#itemsDiv").fadeOut("slow", function () {
+                //getImoveis();
+                getByRegion();
+            });
+        });
+    });
+
+    function getImoveis() {
+        $("#loadingDiv").fadeIn("slow", function () { });
+        $.ajax({
+            dataType: "text",
+            type: "GET",
+            url: "https://mobilehousetracker.herokuapp.com/olx",
+            success: function (data) {
+                $('#itemsDiv').html(data);
+                $("#loadingDiv").fadeOut("slow", function () {
+                    $("#itemsDiv").fadeIn("slow", function () {
+                    });
+                });
+
+            },
+            error: function (e) {
+                console.log(e);
+                $("#loadingDiv").fadeOut("slow", function () { });
+            }
+        });
+    }
+
+    function getByRegion() {
+        var url;
+        var selectedItem = parseInt($('#regionSelect').val());
+
+        switch (selectedItem) {
+            case 1:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/centro/imoveis/aluguel';
+                break;
+            case 2:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/continente/imoveis/aluguel';
+                break;
+            case 3:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/leste/imoveis/aluguel';
+                break;
+            case 4:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/norte/imoveis/aluguel';
+                break;
+            case 5:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/sul/imoveis/aluguel';
+                break;
+            default:
+                url = 'http://sc.olx.com.br/florianopolis-e-regiao/imoveis/aluguel';
+                break;
+        }
+
+        $("#loadingDiv").fadeIn("slow", function () { });
+        $.ajax({
+            dataType: "text",
+            data: { URL: url, MAX: $('#maxValueInput').val() },
+            type: "POST",
+            url: "https://mobilehousetracker.herokuapp.com/olx",
+            //url: "http://localhost:1845/olx",
+            success: function (data) {
+                $('#itemsDiv').html(data);
+                $("#loadingDiv").fadeOut("slow", function () {
+                    $("#itemsDiv").fadeIn("slow", function () {
+                    });
+                });
+            },
+            error: function (e) {
+                console.log(e);
+                $("#loadingDiv").fadeOut("slow", function () { });
+            }
+        });
+    }
+</script>
