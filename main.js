@@ -75,7 +75,8 @@ function getOLX(req,res) {
 								}
 							}
 						});
-						content += '</table>';
+                        content += '</table>';
+                        content += '<h1>Total: ' + listLink.length + '</h1>';
 						
 						res.send(content);
 					}
