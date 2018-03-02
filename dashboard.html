@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mobile House Tracker</title>
+		<!-- Browser Favicons-->
+		<meta name="msapplication-config" content="/public/resources/icon/browserconfig.xml"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+		<!-- Theme-->
+		<script src="/public/vendors/cookie/cookie.js" type="text/javascript"></script>
+		<script src="/public/resources/js/themes/base.js" type="text/javascript"></script>
+		<!-- Stylesheets-->
+		<link href="/public/vendors/bootstrap/bootstrap.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/vendors/animate/animate.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/vendors/metismenu/metismenu.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/vendors/font-awesome/font-awesome.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/vendors/pixeden-stroke/pixeden-stroke.css" rel="stylesheet" type="text/css"/>
+		<link href="/public/resources/css/dashboard/dashboard.css" rel="stylesheet" type="text/css"/>
+		<style type="text/css">
+			.hidden {
+				display: none !important;
+				visibility: hidden !important;
+			}
+		</style>
+	</head>
+
+	<body data-theme="sunset">
+		<!--TOP MENU-->
+		<div class="navbar -dark -fixed-top -has-6-items -opaque">
+			<div id="navigationBar" class="navbar-wrapper">
+				<div class="sidebar-toggle hidden-lg-up hidden-xs-down" id="sidebar-toggle-navbar-brand" data-target="#sidebar">
+					<a href="javascript:void(0);"> <i class="fa fa-bars"> </i></a>
+				</div>
+				<a class="navbar-brand hidden-xs-down" href="dashboard.html"> 
+					<h1>Mobile House Tracker</h1>
+				</a>
+				<ul class="navbar-nav -right">
+					<li class="sidebar-toggle hidden-sm-up" id="sidebar-toggle" data-target="#sidebar"> <a href="javascript:void(0);"> <i class="fa fa-bars"> </i></a></li>
+					<li> 
+						<a class="has-morph-dropdown" href="#notifications-dropdown"><i class="pe pe-bell"></i>
+						<span v-if="hasNotifications" class="navbar-item-count">
+							{{ total }}
+						</span></a>
+					</li>
+					<li class="navbar-profile"> <a class="has-morph-dropdown" href="#profile-dropdown"><i class="pe pe-user"></i></a></li>
+				</ul>
+				<div class="morph-dropdown-wrapper -dark -right">
+					<div class="morph-dropdown-list -links" style="margin-right: 176px; height: 0px; width: 0px; transform: matrix(1, 0, 0, 1, 0, 0);">
+						<div class="morph-dropdown" id="notifications-dropdown">
+							<div class="morph-content" style="">
+								<h3>Notificações</h3>
+								<p class="_text-muted">Confira os novos imóveis que encontramos para você.</p>
+								<ul class="morph-links -small">
+									<template v-for="item in notifications">
+										<li>
+											<a href="#"> 
+												<img src="/public/resources/img/users/male3.jpg"> 
+												<strong>[OLX] </strong> {{ item.title }}.<small>R$ {{ item.price }} ás {{ item.gatheredTime | formattedDate }}</small>
+											</a>
+										</li>
+										<!--<tr>
+											<td>
+												<a v-bind:href="item.url" target="_blank">{{ item.title }}</a>
+											</td>
+											<td>R$ {{ item.price }}</td>
+											<td>{{ item.gatheredTime | formattedDate }}</td>
+											<td>OLX</td>
+											<td class="_text-success">Completed  </td>
+											<td>
+												<a href="#">
+													<i class="fa fa-ellipsis-v"> </i>
+												</a>
+											</td>
+										</tr>-->
+									</template>
+								</ul>
+								<div v-on:click="clearNotifications" class="_margin-top-1x" cursor="pointer"> <a class="btn -primary -block">Limpar Notificações</a></div>
+							</div>
+						</div>
+						<div class="morph-dropdown" id="profile-dropdown">
+							<div class="morph-content -links" style="">
+								<div class="morph-profile">
+								<img src="/public/resources/img/users/male11.jpg">
+								<h4>John Doe</h4>
+								<p>Senior Web Developer </p>
+								</div>
+								<ul class="morph-links">
+									<li><a href="#">My Profile</a></li>
+									<li><a href="#">Account Settings</a></li>
+								</ul>
+								<div class="_margin-top-1x"> <a class="btn -primary -block">Sign Out</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--LEFT MENU-->
+		<div class="sidebar -dark -left -slideable" id="sidebar">
+			<div class="scrollable">
+				<div class="scrollable-content">
+					<div class="sidebar-wrapper"> 
+						<ul class="sidebar-menu metismenu">
+							<li><a href="documentation-index.html"> <i class="pe pe-notebook"></i><span> Início</span></a>
+							</li>
+							<li><a href="javascript:void(0);"> <i class="pe pe-ribbon"></i><span> Configurações</span><span class="fa arrow"></span></a>
+								<ul aria-expanded="false" class="collapse">
+									<li><a href="documentation-getting-started-how-to-download.html"> <i></i><span> Filtros</span></a>
+									</li>
+									<li><a href="documentation-getting-started-what-is-included.html"> <i></i><span> Notificações</span></a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="javascript:void(0);"> <i class="pe pe-paint-bucket"></i><span> Relatórios</span><span class="fa arrow"></span></a>
+								<ul aria-expanded="false" class="collapse">
+									<li><a href="documentation-theming-rscss.html"> <i></i><span> Média de Preço</span></a>
+									</li>
+									<li><a href="documentation-theming-components.html"> <i></i><span> Ocorrências Diárias</span></a>
+									</li>
+									<li><a href="documentation-theming-choosing-theme.html"> <i></i><span> Choosing a Theme</span></a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="javascript:void(0);"> <i class="pe pe-info"></i><span> Sobre o Sistema</span><span class="fa arrow"></span></a>
+								<ul aria-expanded="false" class="collapse">
+									<li><a href="documentation-introduction-about.html"> <i></i><span> Tempo de Atividade</span></a>
+									</li>
+									<li><a href="documentation-introduction-licensing.html"> <i></i><span> Guia do Usuário</span></a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="javascript:void(0);"> <i class="pe pe-info"></i><span> Feedback</span><span class="fa arrow"></span></a>
+								<ul aria-expanded="false" class="collapse">
+									<li><a href="documentation-introduction-about.html"> <i></i><span> Avalie</span></a>
+									</li>
+									<li><a href="documentation-introduction-licensing.html"> <i></i><span> Reporte um Erro</span></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--CONTENT-->
+		<div class="content -dark -with-left-sidebar -collapsible">
+			<div class="container-fluid">
+				<!--FILTER-->
+				<div id="filtrosDiv" class="row">
+					<div class="col -xl-12">
+						<div class="panel -dark -collapsible">
+							<div class="panel-heading">
+								<ul class="panel-actions -centered">
+									<li> 
+										<a data-action="collapse" href="#"><i class="fa fa-chevron-down"> </i></a>
+									</li>
+								</ul>
+								<h4>Filtros</h5>
+								<span>Defina os padrões de busca do serviço</small>
+							</div>
+							<div class="panel-body">
+								<form class="form -dark">
+									<div class="row">
+										<!-- Form Group-->
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label>Sites</label>
+												<div class="form-check -checkbox">
+													<input v-model="OLX" class="form-check-input" id="olx-checkbox" type="checkbox" name="olx-checkbox">
+													<label for="olx-checkbox">OLX</label>
+												</div>
+												<div class="form-check -checkbox">
+													<input v-model="ZAP" class="form-check-input" id="zap-checkbox" name="zap-checkbox" type="checkbox">
+													<label for="zap-checkbox">ZAP</label>
+												</div>
+												<div class="form-check disabled -checkbox">
+													<input class="form-check-input" id="paes-checkbox" disabled="true" name="paes-checkbox" type="checkbox">
+													<label for="paes-checkbox">Paes Imóveis</label>
+												</div>
+												<div class="form-check disabled -checkbox">
+													<input class="form-check-input" id="vivareal-checkbox" disabled="true" name="vivareal-checkbox" type="checkbox">
+													<label for="vivareal-checkbox">Viva Real</label>
+												</div>
+												<div class="form-check disabled -checkbox">
+													<input class="form-check-input" id="mercadolivre-checkbox" disabled="true" name="mercadolivre-checkbox" type="checkbox">
+													<label for="mercadolivre-checkbox">Mercado Livre</label>
+												</div>
+											</div>
+										</div>
+										<!-- Form Group-->
+										<div class="col-lg-4 offset-lg-1">
+											<div class="form-group">
+												<label>Região</label>
+												<div class="form-check -radio">
+													<input v-model="REGIONID" class="form-check-input" id="form-elements-radio-4" name="region" value="4" type="radio">
+													<label for="form-elements-radio-4"> Florianópolis - Norte</label>
+												</div>
+												<div class="form-check -radio">
+													<input v-model="REGIONID" class="form-check-input" id="form-elements-radio-5" name="region" value="5" type="radio">
+													<label for="form-elements-radio-5"> Florianópolis - Sul</label>
+												</div>
+												<div class="form-check -radio">
+													<input v-model="REGIONID" class="form-check-input" id="form-elements-radio-3" name="region" value="3" type="radio">
+													<label for="form-elements-radio-3"> Florianópolis - Leste</label>
+												</div>
+												<div class="form-check -radio">
+													<input v-model="REGIONID" class="form-check-input" id="form-elements-radio-1" name="region" value="1" type="radio">
+													<label for="form-elements-radio-1"> Florianópolis - Centro</label>
+												</div>
+												<div class="form-check -radio disabled">
+													<input v-model="REGIONID" class="form-check-input" id="form-elements-radio-2" name="region" value="2" type="radio" disabled="true">
+													<label for="form-elements-radio-2"> Florianópolis - Continente</label>
+												</div>
+											</div>
+										</div>										
+										<!-- Form Group-->
+										<div class="col-lg-3">
+											<div class="form-group">
+												<label class="form-label" for="valorInput">Máximo</label>
+												<input v-model="MAX" class="form-control" id="valorMaximoInput" name="input-mask-currency" type="text" placeholder="R$" />
+												<!--data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'autoGroup': false, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" -->
+												<small class="form-text _text-muted">Defina o valor máximo do imóvel.</small>
+											</div>
+											<div class="form-group">
+												<label class="form-label" for="valorInput">Mínimo</label>
+												<input class="form-control" id="valorMinimoInput" disabled="true" tooltip="Campo indisponível" name="input-mask-currency" type="text" placeholder="R$"
+													   data-inputmask="'alias': 'numeric', 'groupSeparator': '.', 'autoGroup': false, 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" />
+												<small class="form-text _text-muted">Defina o valor mínimo do imóvel.</small>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="panel-footer">
+								<a id="applyFilterButton" class="btn -success _pull-right" href="#"> <i class="fa fa-check-circle"> </i> Aplicar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--RESULTS-->
+				<div id="resultsDiv" class="row">
+					<div class="col -xl-12">
+						<div class="panel -dark">
+							<div class="panel-heading">
+								<ul class="panel-actions -centered">
+									<li>
+										<a href="#">
+											<i class="fa fa-print"> </i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-refresh"> </i>
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+											<i class="fa fa-bars"> </i>
+										</a>
+										<div class="dropdown-menu -right -dark">
+											<a class="dropdown-item">
+												<i class="fa fa-cloud"> </i> Action</a><a class="dropdown-item">
+												<i class="fa fa-refresh"> </i> Update</a>
+											<div class="dropdown-divider"/>
+											<a class="dropdown-item">
+												<i class="fa fa-cog"> </i> Settings</a>
+										</div>
+									</li>
+								</ul>
+								<h4>Resultado</h4>
+							</div>
+							<div class="table-responsive">
+								<table class="table -dark">
+									<thead>
+										<tr>
+											<th>Titulo</th>
+											<th>Valor</th>
+											<th>Data</th>
+											<th>Origem</th>
+											<th>Status</th>
+											<th> </th>
+										</tr>
+									</thead>
+									<tbody>
+										<template v-for="item in items">
+											<tr>
+												<td>
+													<a v-bind:href="item.url" target="_blank">{{ item.title }}</a>
+												</td>
+												<td>R$ {{ item.price }}</td>
+												<td>{{ item.gatheredTime | formattedDate }}</td>
+												<td>OLX</td>
+												<td class="_text-success">Completed  </td>
+												<td>
+													<a href="#">
+														<i class="fa fa-ellipsis-v"> </i>
+													</a>
+												</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Scripts-->
+		<script src="/public/vendors/jquery/jquery.js" type="text/javascript"></script>
+		<script src="/public/vendors/gsap/gsap.js" type="text/javascript"></script>
+		<script src="/public/vendors/hammer/hammer.js" type="text/javascript"></script>
+		<script src="/public/vendors/tether/tether.js" type="text/javascript"></script>
+		<script src="/public/vendors/moment/moment.js" type="text/javascript"></script>
+		<script src="/public/vendors/bootstrap/bootstrap.js" type="text/javascript"></script>
+		<script src="/public/vendors/bootstrap/plugins/modal.js" type="text/javascript"></script>
+		<script src="/public/vendors/datepicker/datepicker.js" type="text/javascript"></script>
+		<script src="/public/vendors/validator/validator.js" type="text/javascript"></script>
+		<script src="/public/vendors/perfect-scrollbar/perfect-scrollbar.js" type="text/javascript"></script>
+		<script src="/public/vendors/gritter/gritter.js" type="text/javascript"></script>
+		<script src="/public/vendors/metismenu/metismenu.js" type="text/javascript"></script>
+		<script src="/public/resources/js/animus/animus.js" type="text/javascript"></script>
+		<script src="/public/resources/js/components/morph-dropdown.js" type="text/javascript"></script>
+		<script src="/public/resources/js/components/navbar.js" type="text/javascript"></script>
+		<script src="/public/resources/js/components/panel.js" type="text/javascript"></script>
+		<script src="/public/resources/js/components/sidebar.js" type="text/javascript"></script>
+		<script src="/public/resources/js/dashboard/dashboard.js" type="text/javascript"></script>
+		<script src="/public/vendors/sparkline/sparkline.js" type="text/javascript"></script>
+		<script src="/public/vendors/flot/flot.js" type="text/javascript"></script>
+		<script src="/public/resources/js/dashboard/views/index.js" type="text/javascript"></script>
+		<script src="/public/vendors/inputmask/inputmask.js" type="text/javascript"></script>
+		<script src="/public/resources/js/dashboard/views/forms/input-masks.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.0/socket.io.min.js"></script>
+    	<script src="https://unpkg.com/vue@2.3.4"></script>
+		<script src="/public/scripts/basic.js" type="text/javascript"></script>
+	</body>
+</html>

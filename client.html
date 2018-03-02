@@ -4,100 +4,47 @@
 <head>
     <meta charset="utf-8" />
     <title>Mobile House Tracker</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="http://knockoutjs.com/downloads/knockout-3.4.0.debug.js" type="text/javascript"></script>
-    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+    <script src="https://unpkg.com/vue@2.3.4"></script>
 </head>
 <body>
-    <div onclick="javascript: RefreshMap()" style="padding: 10px;">
-        Refresh Map
+    <div id="mainDiv">
+        <input v-model="firstName" type="text" />
+        <input v-model="lastName" type="text" />
+        <ul>
+            <template v-for="item in items">
+                <li>{{ item.price }}</li>
+            </template>
+        </ul>
     </div>
-    <div onclick="javascript: ClearMap()" style="padding: 10px;">
-        Clear Map
-    </div>
-    <div style='overflow:hidden; height: 440px; width: 700px;'>
-        <div id='gmap_canvas' style='height: 440px; width: 700px;'></div>
-    </div>
+
+    <script type="text/javascript">
+        var user = {
+            firstName: 'Luiz',
+            lastName: 'Rodolpho',
+            items: []
+        }
+        Vue.filter('sortPrice', function (arr) {
+            return arr.sort(function(a, b){ return b.price - a.price });
+        })
+        var userViewModel = new Vue({
+            el: '#mainDiv',
+            data: user,
+            methods: {
+                addItem: function (i, p) {
+                    this.items.push({index: i, price: p});
+                    this.items = this.sortByPrice(this.items);
+                },
+                addItems: function (arr) {
+                    [].push.apply(this.items, arr);
+                    this.items = this.sortByPrice(this.items);
+                },
+                sortByPrice: function(arr) {
+                    return arr.sort(function(a, b){ return b.price - a.price });
+                }
+            },
+            computed: {
+            }
+        });
+    </script>
 </body>
 </html>
-
-<script type="text/javascript">
-    var coords;
-
-    $(function () {
-        // Request a position. We accept positions whose age is not
-        // greater than 10 minutes. If the user agent does not have a
-        // fresh enough cached position object, it will automatically
-        // acquire a new one.
-        navigator.geolocation.getCurrentPosition(successCallback,
-                                                 errorCallback,
-                                                 { maximumAge: 600000 });
-    });
-
-    // html5 geolocation
-    function successCallback(position) {
-        // By using the 'maximumAge' option above, the position
-        // object is guaranteed to be at most 10 minutes old.
-        console.log("successCallback!");
-        coords = position.coords;
-        //marker.position = new google.maps.LatLng(coords.latitude, coords.longitude);
-        //marker.map.center = new google.maps.LatLng(coords.latitude, coords.longitude);
-        //marker.setMap(map);
-
-        init_map();
-    }
-    function errorCallback(error) {
-        // Update a div element with error.message.
-        console.log("errorCallback!");
-    }
-
-    // google maps
-    function init_map()
-    {
-        var myOptions = {
-            zoom: 15,
-            //center: new google.maps.LatLng(-27.5953778, -48.548049900000024),
-            center: new google.maps.LatLng(coords.latitude, coords.longitude),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-        map.addListener('center_changed', function () {
-            // 3 seconds after the center of the map has changed, pan back to the
-            // marker.
-            window.setTimeout(function () {
-                map.panTo(marker.getPosition());
-            }, 3000);
-        });
-
-        marker = new google.maps.Marker({
-            map: map,
-            //position: new google.maps.LatLng(-27.5953778, -48.548049900000024)
-            position: new google.maps.LatLng(coords.latitude, coords.longitude)
-        });
-        infowindow = new google.maps.InfoWindow({
-            content: '<strong>Mobile House Tracker</strong><br>Florianópolis, Santa Catarina, Brazil<br>'
-        });
-
-        google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker);
-    }
-
-    //google.maps.event.addDomListener(window, 'load', init_map);
-
-
-    function RefreshMap()
-    {
-        navigator.geolocation.getCurrentPosition(successCallback,
-                                                 errorCallback,
-                                                 { maximumAge: 600000 });
-    }
-
-    function ClearMap()
-    {
-        marker.setMap(null);
-    }
-</script>
-
-<!-- AIzaSyAtUTfkBLw_6brKx71Ykw4eR3aRb6uOb_0 -->

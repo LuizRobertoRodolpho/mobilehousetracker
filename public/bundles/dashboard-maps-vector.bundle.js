@@ -1,0 +1,9 @@
+require('../vendors/vectormaps/vectormaps.js');
+require('../vendors/vectormaps/maps/world.js');
+require('../vendors/vectormaps/maps/continents/africa.js');
+require('../vendors/vectormaps/maps/continents/asia.js');
+require('../vendors/vectormaps/maps/continents/australia.js');
+require('../vendors/vectormaps/maps/continents/europe.js');
+require('../vendors/vectormaps/maps/continents/north-america.js');
+require('../vendors/vectormaps/maps/continents/south-america.js');
+require('../resources/js/dashboard/views/maps/vector.coffee');

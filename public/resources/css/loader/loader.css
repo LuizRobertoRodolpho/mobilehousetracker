@@ -1,0 +1,381 @@
+/*
+  0. Configuration
+
+  @visible Stylus only
+*/
+/*
+  1. Core
+*/
+.loader-wrapper {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+.loader {
+  left: 50%;
+  top: 50%;
+  height: 60px;
+  width: 60px;
+  position: fixed;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+.loader span {
+  -webkit-animation: loader 4s ease-in-out infinite;
+          animation: loader 4s ease-in-out infinite;
+  position: absolute;
+  background: #fff;
+  display: block;
+  opacity: 0;
+  height: 12px;
+  width: 12px;
+}
+.loader span.loader-block:nth-child(16n + 1) {
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
+  top: 0px;
+  left: 0px;
+}
+.loader span.loader-block:nth-child(16n + 2) {
+  -webkit-animation-delay: 1.12s;
+          animation-delay: 1.12s;
+  top: 0px;
+  left: 16px;
+}
+.loader span.loader-block:nth-child(16n + 3) {
+  -webkit-animation-delay: 1.04s;
+          animation-delay: 1.04s;
+  top: 0px;
+  left: 32px;
+}
+.loader span.loader-block:nth-child(16n + 4) {
+  -webkit-animation-delay: 0.96s;
+          animation-delay: 0.96s;
+  top: 0px;
+  left: 48px;
+}
+.loader span.loader-block:nth-child(16n + 5) {
+  -webkit-animation-delay: 0.88s;
+          animation-delay: 0.88s;
+  top: 16px;
+  left: 0px;
+}
+.loader span.loader-block:nth-child(16n + 6) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+  top: 16px;
+  left: 16px;
+}
+.loader span.loader-block:nth-child(16n + 7) {
+  -webkit-animation-delay: 0.72s;
+          animation-delay: 0.72s;
+  top: 16px;
+  left: 32px;
+}
+.loader span.loader-block:nth-child(16n + 8) {
+  -webkit-animation-delay: 0.64s;
+          animation-delay: 0.64s;
+  top: 16px;
+  left: 48px;
+}
+.loader span.loader-block:nth-child(16n + 9) {
+  -webkit-animation-delay: 0.56s;
+          animation-delay: 0.56s;
+  top: 32px;
+  left: 0px;
+}
+.loader span.loader-block:nth-child(16n + 10) {
+  -webkit-animation-delay: 0.48s;
+          animation-delay: 0.48s;
+  top: 32px;
+  left: 16px;
+}
+.loader span.loader-block:nth-child(16n + 11) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+  top: 32px;
+  left: 32px;
+}
+.loader span.loader-block:nth-child(16n + 12) {
+  -webkit-animation-delay: 0.32s;
+          animation-delay: 0.32s;
+  top: 32px;
+  left: 48px;
+}
+.loader span.loader-block:nth-child(16n + 13) {
+  -webkit-animation-delay: 0.24s;
+          animation-delay: 0.24s;
+  top: 48px;
+  left: 0px;
+}
+.loader span.loader-block:nth-child(16n + 14) {
+  -webkit-animation-delay: 0.16s;
+          animation-delay: 0.16s;
+  top: 48px;
+  left: 16px;
+}
+.loader span.loader-block:nth-child(16n + 15) {
+  -webkit-animation-delay: 0.08s;
+          animation-delay: 0.08s;
+  top: 48px;
+  left: 32px;
+}
+.loader span.loader-block:nth-child(16n + 16) {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  top: 48px;
+  left: 48px;
+}
+@-webkit-keyframes loader {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  15% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  85% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+}
+@keyframes loader {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  15% {
+    opacity: 0;
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  85% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+}
+/*
+  2. Theme
+*/
+body.volta .loader-wrapper {
+  background-color: #842448;
+  background-image: linear-gradient(to bottom right, #c04848, #480048);
+}
+body.purple-bliss .loader-wrapper {
+  background-color: #204363;
+  background-image: linear-gradient(to bottom right, #360033, #0b8793);
+}
+body.love-couple .loader-wrapper {
+  background-color: #614362;
+  background-image: linear-gradient(to bottom right, #89253e, #3a6186);
+}
+body.deep-space .loader-wrapper {
+  background-color: #212121;
+  background-image: linear-gradient(to bottom right, #434343, #000);
+}
+body.from-beyond .loader-wrapper {
+  background-color: #414660;
+  background-image: linear-gradient(to bottom right, #838181, #000c40);
+}
+body.curiosity-blue .loader-wrapper {
+  background-color: #476283;
+  background-image: linear-gradient(to bottom right, #3d72b4, #525252);
+}
+body.orca .loader-wrapper {
+  background-color: #266b62;
+  background-image: linear-gradient(to bottom right, #093637, #44a08d);
+}
+body.love-tonight .loader-wrapper {
+  background-color: #7a69c7;
+  background-image: linear-gradient(to bottom right, #4568dc, #b06ab3);
+}
+body.love-and-liberty .loader-wrapper {
+  background-color: #641e2e;
+  background-image: linear-gradient(to bottom right, #a83b3b, #200122);
+}
+body.blue-lagoon .loader-wrapper {
+  background-color: #2e6e80;
+  background-image: linear-gradient(to bottom right, #43c6ac, #191654);
+}
+body.grapefruit-sunset .loader-wrapper {
+  background-color: #bc596c;
+  background-image: linear-gradient(to bottom right, #904e95, #e96443);
+}
+body.frost .loader-wrapper {
+  background-color: #00295d;
+  background-image: linear-gradient(to bottom right, #004e92, #000428);
+}
+body.mauve .loader-wrapper {
+  background-color: #5a3963;
+  background-image: linear-gradient(to bottom right, #734b6d, #42275a);
+}
+body.under-the-lake .loader-wrapper {
+  background-color: #16553f;
+  background-image: linear-gradient(to bottom right, #237a57, #093028);
+}
+body.vice-city .loader-wrapper {
+  background-color: #9081c9;
+  background-image: linear-gradient(to bottom right, #ec6ead, #3494e6);
+}
+body.mild .loader-wrapper {
+  background-color: #59aa9e;
+  background-image: linear-gradient(to bottom right, #4ca2cd, #67b26f);
+}
+body.nepal .loader-wrapper {
+  background-color: #825ca6;
+  background-image: linear-gradient(to bottom right, #2657eb, #de6161);
+}
+body.ibiza-sunset .loader-wrapper {
+  background-color: #f6393c;
+  background-image: linear-gradient(to bottom right, #ff6a00, #ee0979);
+}
+body.sunset .loader-wrapper {
+  background-color: #805541;
+  background-image: linear-gradient(to bottom right, #f56217, #0b486b);
+}
+body.colored-lenses .loader-wrapper {
+  background-color: #a59db2;
+  background-image: linear-gradient(to bottom right, #636fa4, #e8cbc0);
+}
+body.disco .loader-wrapper {
+  background-color: #51979a;
+  background-image: linear-gradient(to bottom right, #556270, #4ecdc4);
+}
+body.dania .loader-wrapper {
+  background-color: #9cacc8;
+  background-image: linear-gradient(to bottom right, #7bc6cc, #be93c5);
+}
+body.50shades .loader-wrapper {
+  background-color: #74808b;
+  background-image: linear-gradient(to bottom right, #2c3e50, #bdc3c7);
+}
+body.very-blue .loader-wrapper {
+  background-color: #0348af;
+  background-image: linear-gradient(to bottom right, #0575e6, #021b79);
+}
+body.dawn .loader-wrapper {
+  background-color: #976960;
+  background-image: linear-gradient(to bottom right, #f3904f, #3b4371);
+}
+body.dusk .loader-wrapper {
+  background-color: #8c968b;
+  background-image: linear-gradient(to bottom right, #19547b, #ffd89b);
+}
+body.dusk-2 .loader-wrapper {
+  background-color: #94595e;
+  background-image: linear-gradient(to bottom right, #fd746c, #2c3e50);
+}
+body.delhi .loader-wrapper {
+  background-color: #5f9694;
+  background-image: linear-gradient(to bottom right, #3fada8, #808080);
+}
+body.cosmic-fusion .loader-wrapper {
+  background-color: #9919b2;
+  background-image: linear-gradient(to bottom right, #f0c, #339);
+}
+body.firewatch .loader-wrapper {
+  background-color: #dd3a3c;
+  background-image: linear-gradient(to bottom right, #ef473a, #cb2d3e);
+}
+body.lush .loader-wrapper {
+  background-color: #7fc549;
+  background-image: linear-gradient(to bottom right, #56ab2f, #a8e063);
+}
+body.80s-purple .loader-wrapper {
+  background-color: #38184e;
+  background-image: linear-gradient(to bottom right, #41295a, #2f0743);
+}
+body.royal .loader-wrapper {
+  background-color: #1c2c42;
+  background-image: linear-gradient(to bottom right, #243b55, #141e30);
+}
+body.deep-sea-space .loader-wrapper {
+  background-color: #3c6f7f;
+  background-image: linear-gradient(to bottom right, #4ca1af, #2c3e50);
+}
+body.solid-vault .loader-wrapper {
+  background-color: #3a6da4;
+  background-image: linear-gradient(to bottom right, #3a6073, #3a7bd5);
+}
+body.politics .loader-wrapper {
+  background-color: #8a6c94;
+  background-image: linear-gradient(to bottom right, #f44336, #2196f3);
+}
+body.transfile .loader-wrapper {
+  background-color: #7077b1;
+  background-image: linear-gradient(to bottom right, #cb3066, #16bffd);
+}
+body.red-ocean .loader-wrapper {
+  background-color: #603e40;
+  background-image: linear-gradient(to bottom right, #a43931, #1d4350);
+}
+body.pink-lime .loader-wrapper {
+  background-color: #877f3b;
+  background-image: linear-gradient(to bottom right, #a80077, #6f0);
+}
+body.easy-med .loader-wrapper {
+  background-color: #81b23e;
+  background-image: linear-gradient(to bottom right, #409c43, #c2c93a);
+}
+body.cocoa-ice .loader-wrapper {
+  background-color: #6ed0bc;
+  background-image: linear-gradient(to bottom right, #1ce1ce, #c0c0aa);
+}
+body.candy-ice .loader-wrapper {
+  background-color: #e99a52;
+  background-image: linear-gradient(to bottom right, #db36a4, #f7ff00);
+}
+body.dark-skies .loader-wrapper {
+  background-color: #395b79;
+  background-image: linear-gradient(to bottom right, #283e51, #4b79a1);
+}
+body.forest .loader-wrapper {
+  background-color: #435b3d;
+  background-image: linear-gradient(to bottom right, #2c7744, #5a3f37);
+}
+body.miami-dolphins .loader-wrapper {
+  background-color: #909e74;
+  background-image: linear-gradient(to bottom right, #d39d38, #4da0b0);
+}
+
+/*# sourceMappingURL=loader.css.map */

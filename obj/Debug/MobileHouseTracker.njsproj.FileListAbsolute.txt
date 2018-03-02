@@ -1,0 +1,2 @@
+C:\Elune\Node\MobileHouseTracker\obj\Debug\MobileHouseTracker.njsprojResolveAssemblyReference.cache
+C:\Elune\Node\MobileHouseTracker\bin\Microsoft.NodejsTools.WebRole.dll
