@@ -257,7 +257,7 @@ module.exports = function (request, jsdom, iconv, bodyParser, db) {
 						console.log(err);
 						callback();
 					}
-					var lastIndex = res.seq;
+					var lastIndex = res == null ? 0 : res.seq;
 
 					for (var i in objects)
 					{
