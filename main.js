@@ -28,11 +28,15 @@ try
 	app.use('/public', express.static(__dirname + '/public'));
 
 	app.get('/client', function(req, res){
-		res.sendFile(path.join(__dirname + '/client.html'));
+		res.sendFile(path.join(__dirname + '/pages/client.html'));
+	});
+
+	app.get('/dashboard', function(req, res){
+		res.sendFile(path.join(__dirname + '/pages/dashboard.html'));
 	});
 
 	app.get('/', function(req, res){
-		res.sendFile(path.join(__dirname + '/dashboard.html'));
+		res.sendFile(path.join(__dirname + '/pages/welcome.html'));
 	});
 
 	app.post('/olx',function(req, res){
@@ -57,6 +61,7 @@ var queueZAP = new Array();
     -------------------------------------------------------------------------------------
     Para cada site, iniciar o pooling específio.
 	Checar se o filtro possui a flag para o site.
+	Pensar em possíveis processos separados para cada site.
 */
 var poolingOLX = function () {	
 	setInterval(function() {
