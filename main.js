@@ -10,7 +10,8 @@ var serv 		= require('http').Server(app);
 var port 		= process.env.PORT || 3000;
 var path    	= require("path");
 var mongojs 	= require('mongojs');
-var db 			= mongojs('localhost:27017/houseTracker', ['user', 'filter', 'property', 'counters']);
+// var db 			= mongojs('localhost:27017/houseTracker', ['user', 'filter', 'property', 'counters']);
+var db			= mongojs('beto:asd123?!@ds047571.mlab.com:47571/housetracker', ['user', 'filter', 'property', 'counters']);
 var phantomjs 	= require('phantomjs-prebuilt');
 var binPath 	= phantomjs.path;
 
